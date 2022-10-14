@@ -1,4 +1,5 @@
 const express = require('express');
+const os = require('os');
 //const mysql = require('mysql');
 const PORT = process.env.PORT || 3000;
 
@@ -36,7 +37,7 @@ const app = express();
 
 app.get('/apidate/:idd' , (req,res) => {
     res.header('Access-Control-Allow-Origin',"*");
-      let s = "{time : " + Date() + "}" ;
+      let s = "{time : " + Date()  + ',' +  os.hostname + ',' + os.platform  + ',' + os.arch() + "}";
       //let s = "time = " + Date() ;
       res.send(s);
 });

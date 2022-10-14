@@ -52,6 +52,12 @@
       function AjaxDate() {
         var xhttp = new XMLHttpRequest();
         xhttp.open("GET", "//localhost:3000/apidate/idd", true);
+
+        /* xhttp.open(
+          "GET",
+          "https://polimapusa2-production.up.railway.app/apidate/idd",
+          true
+        );*/
         xhttp.onload = function () {
           debugprint(xhttp.responseText);
         };
