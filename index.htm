@@ -23,7 +23,12 @@
     <textarea id="tadebug" name="tadebug" rows="16" cols="120"> </textarea>
     <script>
       function bt1_onclick() {
-        debugprint("hello button 1");
+        debugprint("hello button 1, window=" + window.location.href);
+      }
+      function getNodeServer() {
+        let swin = window.location.href;
+        if (swin.includes("127.0.0.1")) return "//localhost:3000";
+        return "//165.22.183.176:3000";
       }
       function debugprint(smsg) {
         document.getElementById("tadebug").innerHTML =
@@ -43,7 +48,11 @@
         //let sqlsname = "test";
         //debugprint("sqlsname=" + sqlsname);
         var xhttp = new XMLHttpRequest();
-        xhttp.open("GET", "//localhost:3000/apig/ids?sname=" + sqlsname, true);
+        xhttp.open(
+          "GET",
+          getNodeServer() + "/apig/ids?sname=" + sqlsname,
+          true
+        );
         xhttp.onload = function () {
           debugprint(xhttp.responseText);
         };
@@ -51,7 +60,7 @@
       }
       function AjaxDate() {
         var xhttp = new XMLHttpRequest();
-        xhttp.open("GET", "//localhost:3000/apidate/idd", true);
+        xhttp.open("GET", getNodeServer() + "/apidate/idd", true);
 
         /* xhttp.open(
           "GET",
