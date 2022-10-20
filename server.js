@@ -21,10 +21,12 @@ const app = express();
 
  app.get('/apig/:ids', (req,res) => {
     //req.params.idparturl , req.query.varquerystring
+
     let sname = req.query.sname; 
-    let sql= "select * from persons where family_name > 'aa' order by family_name Limit 10 ";
+    let sql= "selectx * from persons where family_name > 'aa' order by family_name Limit 10 ";
     if( sname != '')   sql = sql.replace( 'aa', sname);
     let query = db.query(sql, (err,results) => {
+        try {
         if(err) throw err;
         let resultx = Object.values(JSON.parse(JSON.stringify(results)));
         let sbuf ="";
@@ -32,7 +34,12 @@ const app = express();
        res.header('Access-Control-Allow-Origin',"*");
        res.send('post fetched..' + sbuf);
     // res.send("post fetched simple..");
-    });
+    } catch (error) {
+    res.header('Access-Control-Allow-Origin',"*");
+    res.send('error' + error);
+    }
+});
+
 });
 
 app.get('/apidate/:idd' , (req,res) => {
